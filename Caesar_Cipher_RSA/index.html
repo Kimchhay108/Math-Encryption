@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptography Demo: Caesar & RSA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Fira+Code:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/img/image.png">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo" id="logo1">
+                        <img src="assets/img/Rupp_logo.png" alt="Logo 1">
+                        L1
+                    </div>
+                    <div class="logo" id="logo2">
+                        <img src="assets/img/ITE.png" alt="Logo 2">
+                        L2
+                    </div>
+                </div>
+                <a href="#" class="site-title">Cryptography Demo</a>
+            </div>
+            <div class="nav-links">
+                <a href="#caesar-cipher">Caesar Cipher</a>
+                <a href="#rsa-cryptography">RSA</a>
+                <a href="#resources">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-8">
+        <header>
+            <h1>Encryption & Decryption</h1>
+            <p class="intro-text">
+                Explore fundamental concepts of number theory in action through classic and modern cryptographic
+                algorithms.
+                <span class="math-symbol">∑</span> Interact with the demos below to see encryption and decryption live!
+                <span class="math-symbol">∏</span>
+            </p>
+            <div class="submission-info">
+                <p><span class="font-bold" style="font-size: 50px;">Mr. LIM SEYHA</span></p>
+                <p style="font-size: 30px;">Mathematic Lecturer, Royal University of Phnom Penh, Phnom Penh</p>
+                <p class="mt-2"><span class="font-bold" style="font-size: 40px;">Group 4</span></p>
+            </div>
+        </header>
+
+        <section id="caesar-cipher">
+            <h2>Caesar Cipher</h2>
+            <div class="image-container">
+                <iframe src="https://www.101computing.net/cipher-wheel/" width="100%" height="700"
+                    style="border: 2px solid #ccc; border-radius: 10px;"></iframe>
+                <p class="text-sm text-gray-600 mt-2">Source: 101Computing.net</p>
+            </div>
+
+            <p class="italic-quote">
+                "One of the earliest and most well-known forms of cryptography was developed by Emperor Julius Caesar.
+                His solution was simple but effective: shift each letter in the alphabet by a fixed number of positions.
+                This technique came to be known as the <em>Caesar Cipher</em>."
+                <span class="source">- Source: <a href="https://caesarcipher.net/" target="_blank"
+                        rel="noopener noreferrer" class="text-blue-700 hover:underline">caesarcipher.net</a></span>
+            </p>
+
+            <p>The Caesar Cipher encrypts a message by shifting each letter forward a fixed number of positions in the
+                alphabet. Here's a brief example with a shift of <code>k = 7</code>:</p>
+            <ol>
+                <li><strong>Convert Numbers for each letter:</strong>
+                    <code>A</code>=0, <code>B</code>=1, <code>C</code>=2, <code>D</code>=3, <code>E</code>=4,
+                    <code>F</code>=5, <code>G</code>=6, <code>H</code>=7, <code>I</code>=8, <code>J</code>=9,
+                    <code>K</code>=10, <code>L</code>=11, <code>M</code>=12, <code>N</code>=13, <code>O</code>=14,
+                    <code>P</code>=15, <code>Q</code>=16, <code>R</code>=17, <code>S</code>=18, <code>T</code>=19,
+                    <code>U</code>=20, <code>V</code>=21, <code>W</code>=22, <code>X</code>=23, <code>Y</code>=24,
+                    <code>Z</code>=25.
+                </li>
+                <li><strong>Encrypt Formula:</strong> The Caesar Cipher encrypts a letter by shifting its number value
+                    by k and wrapping around using <code>C = (P + k) mod 26</code>.</li>
+                <li><strong>Example:</strong> If plaintext is <code>HELLO</code> and key = 7:
+                    <br><code>H</code> (7) + 7 = 14 → <code>O</code>
+                    <br><code>E</code> (4) + 7 = 11 → <code>L</code>
+                    <br><code>L</code> (11) + 7 = 18 → <code>S</code>
+                    <br><code>L</code> (11) + 7 = 18 → <code>S</code>
+                    <br><code>O</code> (14) + 7 = 21 → <code>V</code>
+                </li>
+                <li><strong>Result:</strong> The ciphertext becomes <span class="text-accent">OLSSV</span>.</li>
+            </ol>
+            <p>Decryption is simply the reverse: <code>P = (C - k) mod 26</code>.</p>
+
+            <h4>Caesar Cipher Demo</h4>
+            <div class="demo-card">
+                <label for="caesar-input">Enter your text (plaintext or ciphertext):</label>
+                <input type="text" id="caesar-input" placeholder="Ex: HELLO">
+                <div class="button-group">
+                    <button id="caesar-encrypt-btn" class="btn-primary">🔐 Encrypt</button>
+                    <button id="caesar-decrypt-btn" class="btn-danger">🔓 Decrypt</button>
+                </div>
+                <div class="font-bold text-lg">Result:</div>
+                <div id="caesar-result" class="result-box">No Result</div>
+            </div>
+        </section>
+
+        <section id="rsa-cryptography">
+            <h2>RSA Cryptography</h2>
+            <p class="mt-2">
+                RSA encryption may sound complex at first, but once you understand the core idea — transforming readable
+                messages
+                into secure ciphertext using public keys — it becomes much more approachable.
+                The video below provides a step-by-step demo of how RSA encryption works in practice. It walks you
+                through encoding
+                a message, applying the encryption formula, and seeing the encrypted result.
+                If you're a visual learner, this demonstration will help reinforce your understanding of the RSA
+                encryption process.
+            </p>
+            <h5 class="font-bold text-lg border-b-[1px] mt-4">RSA Encryption Algorithm</h5>
+            <ol style="margin-left: 20px;">
+                <li><strong>Step 1:</strong> Convert the message (M) into a number using ASCII or other encoding
+                    schemes.</li>
+                <li><strong>Step 2:</strong> Use the public key <code>(e, n)</code> to encrypt the message using the
+                    formula:
+                    <br><code>C = M<sup>e</sup> mod n</code>
+                </li>
+            </ol>
+
+            <h5 class="font-bold text-lg border-b-[1px] mt-4">RSA Encryption Example</h5>
+            <p class="mt-2">
+                <strong>Public Key:</strong> <code>e = 3</code>, <code>n = 33</code><br>
+                <strong>Message (M):</strong> <code>4</code>
+            </p>
+            <p class="mt-2">
+                Encryption Formula:<br>
+                <code>C = M<sup>e</sup> mod n = 4<sup>3</sup> mod 33 = 64 mod 33 = 31</code>
+            </p>
+            <p class="mt-2">
+                ✅ <strong>Encrypted Message (Cipher Text):</strong> <code>C = 31</code>
+            </p>
+
+            <h3>RSA Key Generation Demo</h3>
+            <div class="demo-card">
+                <label for="rsa-keygen-p">Enter first prime number (p):</label>
+                <input type="number" id="rsa-keygen-p" placeholder="Ex: 61">
+                <label for="rsa-keygen-q">Enter second prime number (q):</label>
+                <input type="number" id="rsa-keygen-q" placeholder="Ex: 53">
+                <button id="rsa-keygen-btn" class="btn-primary">🔑 Generate Keys</button>
+                <div class="font-bold text-lg">Result:</div>
+                <div id="rsa-keygen-result" class="result-box">No Result</div>
+            </div>
+
+            <h3>RSA Encryption Demo</h3>
+            <p class="mt-2">
+                RSA encryption may sound complex at first, but once you understand the core idea — transforming readable
+                messages
+                into secure ciphertext using public keys — it becomes much more approachable.
+                The video below provides a step-by-step demo of how RSA encryption works in practice. It walks you
+                through encoding
+                a message, applying the encryption formula, and seeing the encrypted result.
+                If you're a visual learner, this demonstration will help reinforce your understanding of the RSA
+                encryption process.
+            </p>
+            <div class="demo-card">
+                <label for="rsa-encrypt-input">Enter plaintext to encrypt:</label>
+                <input type="text" id="rsa-encrypt-input" placeholder="Ex: HELLO">
+                <label for="rsa-encrypt-key-e">Enter public key (e):</label>
+                <input type="number" id="rsa-encrypt-key-e" placeholder="NUM">
+                <label for="rsa-encrypt-key-n">Enter modulus (n):</label>
+                <input type="number" id="rsa-encrypt-key-n" placeholder="NUM">
+                <button id="rsa-encrypt-btn" class="btn-primary">🔐 Encrypt</button>
+                <div class="font-bold text-lg">Result:</div>
+                <div id="rsa-encrypt-result" class="result-box">No Result</div>
+            </div>
+
+            <h3>RSA Decryption Demo</h3>
+            <p class="mt-2">
+                RSA Decryption is the process of converting encrypted data (cipher text) back into its original readable
+                form (plain
+                text) using the private key.
+                Once the recipient receives the cipher text, they apply their private key to decrypt it, ensuring that
+                only the
+                rightful owner—who holds the private key—can access the original message.
+            </p>
+            <p class="mt-2">
+                Seeing decryption in action helps connect the dots between theory and practice. The video below walks
+                through an RSA
+                decryption example, clearly showing how a cipher text is transformed back into its original form using
+                the private
+                key.
+                If you're curious about how math ensures message security, this demo makes it easy to follow.
+            </p>
+            <div class="demo-card">
+                <label for="rsa-decrypt-input">Enter ciphertext to decrypt:</label>
+                <input type="text" id="rsa-decrypt-input" placeholder="Ex: 123 456 789">
+                <label for="rsa-decrypt-key-d">Enter private key (d):</label>
+                <input type="number" id="rsa-decrypt-key-d" placeholder="NUM">
+                <label for="rsa-decrypt-key-n">Enter modulus (n):</label>
+                <input type="number" id="rsa-decrypt-key-n" placeholder="NUM">
+                <button id="rsa-decrypt-btn" class="btn-danger">🔓 Decrypt</button>
+                <div class="font-bold text-lg">Result:</div>
+                <div id="rsa-decrypt-result" class="result-box">No Result</div>
+            </div>
+        </section>
+
+        <section id="resources" class="text-center mt-16 mb-10" style="position: relative;">
+            <h2>More Resources</h2>
+            <br>
+            <p class="text-lg mb-4">GitHub repository: </p>
+            
+            <p class="text-xl font-medium">
+                <a href="https://github.com/Kimchhay108/Math-Encryption.git" target="_blank"
+                    class="text-accent hover:underline">
+                    📚 Source Code
+                </a>               
+            </p>
+            <div class="team-logo">
+                <img src="assets/img/image.png" alt="bot" style="width: 150px; object-fit: cover; position: absolute; top: 0;">
+                <img src="assets/img/image.png" alt="bot" style="width: 150px; object-fit: cover; position: absolute; top: 0; right: 0;">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Mathematical Cryptography Demo
+            <a href="#" target="_blank">Group 4</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    <script src="index.js"></script>
+    <script type="module" src="interaction.js"></script>
+    <script type="module" src="rsa-keygen.js"></script>
+    <script type="module" src="rsa-encrypt-decrypt-interaction.js"></script>
+</body>
+
+</html>
