@@ -57,7 +57,7 @@ git clone https://github.com/Kimchhay108/Math-Encryption.git
 cd your-repo-name
 open index.html
 
-👥 Team 4 Members
+👥 Team 4 
 
 📚 Credits
 This project was built for learning purposes as part of our cryptography study.
